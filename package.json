@@ -1,4 +1,11 @@
 {
+  "name": "telegram_trigger_bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "telegraf": "^3.10.1"
   }
