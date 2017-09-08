@@ -30,7 +30,7 @@ bot.hears(/м(а|a)т(е|e)рх(о|o)(с|c)т/i, (ctx, next) => {
   return next();
 });
 
-bot.hears(/в(е|e)р(с|c)у(с|c)/i, (ctx, next) => {
+bot.hears(/в(е|e)р(с|c)(у|y)(с|c)/i, (ctx, next) => {
   ctx.reply('Антихайп', {
     reply_to_message_id: ctx.message.message_id
   });
@@ -44,7 +44,7 @@ bot.hears(/(с|c)л(о|o)м(а|a)л(с|c)я/i, (ctx, next) => {
   return next();
 });
 
-bot.hears(/б(а|a|o|о)тут/i, (ctx) => {
+bot.hears(/б(а|a|o|о)т(у|y)т/i, (ctx) => {
   ctx.telegram.deleteMessage(ctx.chat.id, ctx.message.message_id);
 });
 
