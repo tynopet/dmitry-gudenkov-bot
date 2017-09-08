@@ -21,7 +21,7 @@ bot.hears(/текстайл/i, (ctx, next) => {
   return next();
 });
 
-bot.hears(/маттерхост/i, (ctx, next) => {
+bot.hears(/матерхост/i, (ctx, next) => {
   ctx.reply('Метромост');
   return next();
 });
@@ -37,7 +37,7 @@ bot.hears(/сломался/i, (ctx, next) => {
 });
 
 bot.hears(/батут/i, (ctx, next) => {
-  ctx.reply('Я никогда не пойду с тобой на батуты.', { reply_to_message_id: ctx.message.from.id });
+  ctx.reply('Я никогда не пойду с тобой на батуты.');
   return next();
 });
 
