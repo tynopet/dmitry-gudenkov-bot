@@ -44,7 +44,7 @@ bot.hears(/(с|c)л(о|o)м(а|a)л(с|c)я/i, (ctx, next) => {
   return next();
 });
 
-bot.hears(/б(а|a)тут/i, (ctx) => {
+bot.hears(/б(а|a|o|о)тут/i, (ctx) => {
   ctx.telegram.deleteMessage(ctx.chat.id, ctx.message.message_id);
 });
 
