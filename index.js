@@ -17,7 +17,17 @@ bot.hears(/тунопет/i, (ctx, next) => {
 });
 
 bot.hears(/текстайл/i, (ctx, next) => {
-  ctx.reply('Устиц, все нормально. В большом светлом будущем возможно будет маркдаун');
+  ctx.reply('Все нормально. В большом светлом будущем возможно будет маркдаун');
+  return next();
+});
+
+bot.hears(/маттерхост/i, (ctx, next) => {
+  ctx.reply('Метромост');
+  return next();
+});
+
+bot.hears(/версус/i, (ctx, next) => {
+  ctx.reply('Антихайп');
   return next();
 });
 
@@ -27,12 +37,12 @@ bot.hears(/сломался/i, (ctx, next) => {
 });
 
 bot.hears(/батут/i, (ctx, next) => {
-  ctx.reply('Я никогда не пойду с тобой на батуты.');
+  ctx.reply('Я никогда не пойду с тобой на батуты.', { reply_to_message_id: ctx.message.from.id });
   return next();
 });
 
 bot.hears(/двач/i, (ctx) => {
-  ctx.reply('Камай, иди на хуй!');
+  ctx.reply('Иди на хуй!');
 });
 
 bot.telegram.setWebhook(host);
