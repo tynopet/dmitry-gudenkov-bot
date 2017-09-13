@@ -6,6 +6,15 @@ const port = process.env.PORT || 8443;
 
 const bot = new Telegraf(token);
 
+bot.hears(/(\)){2,}/, (ctx, next) => {
+  if (Math.random() > 0.65) {
+    ctx.reply(')))0))0)', {
+      reply_to_message_id: ctx.message.message_id
+    });
+  }
+  return next();
+});
+
 bot.hears(/фр(о|o)нт(е|e)нд/i, (ctx, next) => {
   ctx.reply('Фронетнд работает. Всегда. Без исключений. Если у вас что-то не получается, вытащите руки из жопы, плес.', {
     reply_to_message_id: ctx.message.message_id
