@@ -1,7 +1,7 @@
 const Telegraf = require('telegraf');
 
-const token = process.env.TOKEN;
-const host = process.env.HOST;
+const token = process.env.TOKEN || '412310251:AAEhAlsnzwC8bB3XNur49V07vj4eGeLO2Xc';
+const host = process.env.HOST || 'https://khmzoojhri.localtunnel.me';
 const port = process.env.PORT || 8443;
 
 const bot = new Telegraf(token);
@@ -16,9 +16,11 @@ bot.hears(/(\)){2,}/, (ctx, next) => {
 });
 
 bot.hears(/фр(о|o)нт(е|e)нд/i, (ctx, next) => {
-  ctx.reply('Фронетнд работает. Всегда. Без исключений. Если у вас что-то не получается, вытащите руки из жопы, плес.', {
-    reply_to_message_id: ctx.message.message_id
-  });
+  if (ctx.chat.id == '-1001074297259') {
+    ctx.reply('Фронетнд работает. Всегда. Без исключений. Если у вас что-то не получается, вытащите руки из жопы, плес.', {
+      reply_to_message_id: ctx.message.message_id
+    });
+  }
   return next();
 });
 
