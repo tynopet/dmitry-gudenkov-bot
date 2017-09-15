@@ -59,10 +59,12 @@ bot.hears(/(6|б|b)+\s?(0|@|а|a|o|о)*\s?(т|t)+\s?(¥|у|y|u)*\s?(т|t)+\s?/i,
   ctx.telegram.deleteMessage(ctx.chat.id, ctx.message.message_id);
 });
 
-bot.hears(/дв(а|a)ч/i, (ctx) => {
-  ctx.reply('Иди на хуй!', {
-    reply_to_message_id: ctx.message.message_id
-  });
+bot.hears(/дв(а|a)ч/i, (ctx, next) => {
+  if (ctx.chat.id == '-1001074297259') {
+    ctx.reply('Иди на хуй!', {
+      reply_to_message_id: ctx.message.message_id
+    });
+  }
 });
 
 bot.telegram.setWebhook(host);
