@@ -1,7 +1,7 @@
 const Telegraf = require('telegraf');
 
-const token = process.env.TOKEN || '412310251:AAEhAlsnzwC8bB3XNur49V07vj4eGeLO2Xc';
-const host = process.env.HOST || 'https://khmzoojhri.localtunnel.me';
+const token = process.env.TOKEN;
+const host = process.env.HOST;
 const port = process.env.PORT || 8443;
 
 const bot = new Telegraf(token);
