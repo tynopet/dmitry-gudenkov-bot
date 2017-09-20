@@ -6,6 +6,17 @@ const port = process.env.PORT || 8443;
 
 const bot = new Telegraf(token);
 
+bot.on('edited_message', (ctx, next) => {
+  if (ctx.update.edited_message.text
+    .match(/(6|б|b)+\s?(0|@|а|a|o|о|у|y|Fl|FI)*\s?(т|t)+\s?(¥|у|y|u)*\s?(т|t)+\s?/i)) {
+    ctx.telegram.deleteMessage(ctx.update.edited_message.chat.id, ctx.update.edited_message.message_id);
+  }
+});
+
+bot.hears(/(6|б|b)+\s?(0|@|а|a|o|о|у|y|Fl|FI)*\s?(т|t)+\s?(¥|у|y|u)*\s?(т|t)+\s?/i, (ctx) => {
+  ctx.telegram.deleteMessage(ctx.chat.id, ctx.message.message_id);
+});
+
 bot.hears(/(\)){2,}/, (ctx, next) => {
   if (Math.random() > 0.65) {
     ctx.reply(')))0))0)', {
@@ -53,10 +64,6 @@ bot.hears(/(с|c)л(о|o)м(а|a)л(с|c)я/i, (ctx, next) => {
     reply_to_message_id: ctx.message.message_id
   });
   return next();
-});
-
-bot.hears(/(6|б|b)+\s?(0|@|а|a|o|о|у|y|Fl|FI)*\s?(т|t)+\s?(¥|у|y|u)*\s?(т|t)+\s?/i, (ctx) => {
-  ctx.telegram.deleteMessage(ctx.chat.id, ctx.message.message_id);
 });
 
 bot.hears(/дв(а|a)ч/i, (ctx, next) => {
