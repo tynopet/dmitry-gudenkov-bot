@@ -18,7 +18,7 @@ bot.hears(/^Тихий час$/, (ctx, next) => {
 
 bot.hears(/^Тихий час окончен$/, (ctx, next) => {
   if (ctx.message.from.id === 89778872) {
-    sleep = true;
+    sleep = false;
     ctx.reply('Боп');
   } else {
     return next();
