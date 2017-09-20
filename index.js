@@ -1,10 +1,35 @@
 const Telegraf = require('telegraf');
 
-const token = process.env.TOKEN;
-const host = process.env.HOST;
+const token = process.env.TOKEN || '412310251:AAEhAlsnzwC8bB3XNur49V07vj4eGeLO2Xc';
+const host = process.env.HOST || 'https://lmekurkhbz.localtunnel.me';
 const port = process.env.PORT || 8443;
 
 const bot = new Telegraf(token);
+let sleep = false;
+
+bot.hears(/^Тихий час$/, (ctx, next) => {
+  if (ctx.message.from.id === 89778872) {
+    sleep = true;
+    ctx.reply('Бип');
+  } else {
+    return next();
+  }
+});
+
+bot.hears(/^Тихий час окончен$/, (ctx, next) => {
+  if (ctx.message.from.id === 89778872) {
+    sleep = true;
+    ctx.reply('Боп');
+  } else {
+    return next();
+  }
+});
+
+bot.on('message', (ctx, next) => {
+  if (sleep && ctx.update.message.from.id === 242046536) {
+    ctx.telegram.deleteMessage(ctx.update.message.chat.id, ctx.update.message.message_id);
+  }
+});
 
 bot.on('edited_message', (ctx, next) => {
   if (ctx.update.edited_message.from.id === 242046536 && ctx.update.edited_message.text
