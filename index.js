@@ -7,7 +7,7 @@ const port = process.env.PORT || 8443;
 const bot = new Telegraf(token);
 
 bot.on('edited_message', (ctx, next) => {
-  if (ctx.update.message.from.id === 242046536 && ctx.update.edited_message.text
+  if (ctx.update.edited_message.from.id === 242046536 && ctx.update.edited_message.text
     .match(/(6|б|b)+(\s|\.|_|\,)*(0|@|а|a|o|о|у|y|Fl|FI)*(\s|\.|_|\,)*(т|t)+(\s|\.|_|\,)*(¥|у|y|u)*(\s|\.|_|\,)*(т|t)+(\s|\.|_|\,)*/i)) {
     ctx.telegram.deleteMessage(ctx.update.edited_message.chat.id, ctx.update.edited_message.message_id);
   }
