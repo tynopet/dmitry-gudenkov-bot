@@ -8,12 +8,12 @@ const bot = new Telegraf(token);
 
 bot.on('edited_message', (ctx, next) => {
   if (ctx.update.edited_message.text
-    .match(/(6|б|b)+\s?(0|@|а|a|o|о|у|y|Fl|FI)*\s?(т|t)+\s?(¥|у|y|u)*\s?(т|t)+\s?/i)) {
+    .match(/(6|б|b)+(\s|\.|_|\,)*(0|@|а|a|o|о|у|y|Fl|FI)*(\s|\.|_|\,)*(т|t)+(\s|\.|_|\,)*(¥|у|y|u)*(\s|\.|_|\,)*(т|t)+(\s|\.|_|\,)*/i)) {
     ctx.telegram.deleteMessage(ctx.update.edited_message.chat.id, ctx.update.edited_message.message_id);
   }
 });
 
-bot.hears(/(6|б|b)+\s?(0|@|а|a|o|о|у|y|Fl|FI)*\s?(т|t)+\s?(¥|у|y|u)*\s?(т|t)+\s?/i, (ctx) => {
+bot.hears(/(6|б|b)+(\s|\.|_|\,)*(0|@|а|a|o|о|у|y|Fl|FI)*(\s|\.|_|\,)*(т|t)+(\s|\.|_|\,)*(¥|у|y|u)*(\s|\.|_|\,)*(т|t)+(\s|\.|_|\,)*/i, (ctx) => {
   ctx.telegram.deleteMessage(ctx.chat.id, ctx.message.message_id);
 });
 
