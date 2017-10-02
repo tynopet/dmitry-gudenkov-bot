@@ -7,24 +7,6 @@ const port = process.env.PORT || 8443;
 const bot = new Telegraf(token);
 let censor = false;
 
-// bot.hears(/^Тихий час$/, (ctx, next) => {
-//   if (ctx.message.from.id === 89778872) {
-//     sleep = true;
-//     ctx.reply("Бип");
-//   } else {
-//     return next();
-//   }
-// });
-
-// bot.hears(/^Тихий час окончен$/, (ctx, next) => {
-//   if (ctx.message.from.id === 89778872) {
-//     sleep = false;
-//     ctx.reply("Боп");
-//   } else {
-//     return next();
-//   }
-// });
-
 bot.hears(/^Цензура$/, (ctx, next) => {
   if (ctx.message.from.id !== 242046536) {
     censor = true;
@@ -42,17 +24,6 @@ bot.hears(/^Стоп цензура$/, (ctx, next) => {
     return next();
   }
 });
-
-// bot.on("message", (ctx, next) => {
-//   if (sleep && ctx.update.message.from.id === 242046536) {
-//     ctx.telegram.deleteMessage(
-//       ctx.update.message.chat.id,
-//       ctx.update.message.message_id
-//     );
-//   } else {
-//     return next();
-//   }
-// });
 
 bot.on("edited_message", (ctx, next) => {
   if (
