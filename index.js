@@ -5,46 +5,50 @@ const host = process.env.HOST;
 const port = process.env.PORT || 8443;
 
 const bot = new Telegraf(token);
+const timeout = 60000;
+const maxCount = 2;
 let censor = false;
-
-bot.hears(/^Цензура$/, (ctx, next) => {
-  if (ctx.message.from.id !== 242046536) {
-    censor = true;
-    ctx.reply("Бип");
-  } else {
-    return next();
-  }
-});
-
-bot.hears(/^Стоп цензура$/, (ctx, next) => {
-  if (ctx.message.from.id !== 242046536) {
-    censor = false;
-    ctx.reply("Боп");
-  } else {
-    return next();
-  }
-});
+let count = 0;
 
 bot.on("edited_message", (ctx, next) => {
   if (
-    censor &&
     ctx.update.edited_message.from.id === 242046536 &&
     ctx.update.edited_message.text.match(
       /(6|б|b)+(\s|\.|_|\,)*(0|@|а|a|o|о|у|y|Fl|FI)*(\s|\.|_|\,)*(т|t)+(\s|\.|_|\,)*(¥|у|y|u)*(\s|\.|_|\,)*(т|t)+(\s|\.|_|\,)*/i
     )
   ) {
-    ctx.telegram.deleteMessage(
-      ctx.update.edited_message.chat.id,
-      ctx.update.edited_message.message_id
-    );
+    count = count + 1;
+    if (count >= maxCount) {
+      censor = true;
+      setTimeout(() => {
+        censor = false;
+        count = 0;
+      }, timeout);
+    }
+    if (censor) {
+      ctx.telegram.deleteMessage(
+        ctx.update.edited_message.chat.id,
+        ctx.update.edited_message.message_id
+      );
+    }
   }
 });
 
 bot.hears(
   /(6|б|b)+(\s|\.|_|\,)*(0|@|а|a|o|о|у|y|Fl|FI)*(\s|\.|_|\,)*(т|t)+(\s|\.|_|\,)*(¥|у|y|u)*(\s|\.|_|\,)*(т|t)+(\s|\.|_|\,)*/i,
   ctx => {
-    if (censor && ctx.update.message.from.id === 242046536) {
-      ctx.telegram.deleteMessage(ctx.chat.id, ctx.message.message_id);
+    if (ctx.update.message.from.id === 242046536) {
+      count = count + 1;
+      if (count >= maxCount) {
+        censor = true;
+        setTimeout(() => {
+          censor = false;
+          count = 0;
+        }, timeout);
+      }
+      if (censor) {
+        ctx.telegram.deleteMessage(ctx.chat.id, ctx.message.message_id);
+      }
     }
   }
 );
