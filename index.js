@@ -43,16 +43,16 @@ bot.hears(/^Стоп цензура$/, (ctx, next) => {
   }
 });
 
-bot.on("message", (ctx, next) => {
-  if (sleep && ctx.update.message.from.id === 242046536) {
-    ctx.telegram.deleteMessage(
-      ctx.update.message.chat.id,
-      ctx.update.message.message_id
-    );
-  } else {
-    return next();
-  }
-});
+// bot.on("message", (ctx, next) => {
+//   if (sleep && ctx.update.message.from.id === 242046536) {
+//     ctx.telegram.deleteMessage(
+//       ctx.update.message.chat.id,
+//       ctx.update.message.message_id
+//     );
+//   } else {
+//     return next();
+//   }
+// });
 
 bot.on("edited_message", (ctx, next) => {
   if (
