@@ -11,7 +11,12 @@ let censor = false;
 let count = 0;
 
 bot.on("edited_message", (ctx, next) => {
-  if (
+  if (ctx.chat.id !== "-1001074297259") {
+    ctx.telegram.deleteMessage(
+      ctx.update.edited_message.chat.id,
+      ctx.update.edited_message.message_id
+    );
+  } else if (
     ctx.update.edited_message.from.id === 242046536 &&
     ctx.update.edited_message.text.match(
       /(6|б|b)+(\s|\.|_|\,)*(0|@|а|a|o|о|у|y|Fl|FI)*(\s|\.|_|\,)*(т|t)+(\s|\.|_|\,)*(¥|у|y|u)*(\s|\.|_|\,)*(т|t)+(\s|\.|_|\,)*/i
@@ -37,7 +42,9 @@ bot.on("edited_message", (ctx, next) => {
 bot.hears(
   /(6|б|b)+(\s|\.|_|\,)*(0|@|а|a|o|о|у|y|Fl|FI)*(\s|\.|_|\,)*(т|t)+(\s|\.|_|\,)*(¥|у|y|u)*(\s|\.|_|\,)*(т|t)+(\s|\.|_|\,)*/i,
   ctx => {
-    if (ctx.update.message.from.id === 242046536) {
+    if (ctx.chat.id !== "-1001074297259") {
+      ctx.telegram.deleteMessage(ctx.chat.id, ctx.message.message_id);
+    } else if (ctx.update.message.from.id === 242046536) {
       count = count + 1;
       if (count >= maxCount) {
         censor = true;
