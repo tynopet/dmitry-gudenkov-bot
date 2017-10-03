@@ -11,7 +11,12 @@ let censor = false;
 let count = 0;
 
 bot.on("edited_message", (ctx, next) => {
-  if (ctx.chat.id !== "-1001074297259") {
+  if (
+    ctx.update.edited_message.chat.id !== "-1001074297259" &&
+    ctx.update.edited_message.text.match(
+      /(6|б|b)+(\s|\.|_|\,)*(0|@|а|a|o|о|у|y|Fl|FI)*(\s|\.|_|\,)*(т|t)+(\s|\.|_|\,)*(¥|у|y|u)*(\s|\.|_|\,)*(т|t)+(\s|\.|_|\,)*/i
+    )
+  ) {
     ctx.telegram.deleteMessage(
       ctx.update.edited_message.chat.id,
       ctx.update.edited_message.message_id
